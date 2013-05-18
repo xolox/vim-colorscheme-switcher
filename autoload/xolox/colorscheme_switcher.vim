@@ -1,9 +1,9 @@
 " Vim plug-in
 " Maintainer: Peter Odding <peter@peterodding.com>
-" Last Change: May 18, 2013
+" Last Change: May 19, 2013
 " URL: http://peterodding.com/code/vim/colorscheme-switcher
 
-let g:xolox#colorscheme_switcher#version = '0.1'
+let g:xolox#colorscheme_switcher#version = '0.2'
 
 call xolox#misc#compat#check('colorscheme-switcher', 3)
 
