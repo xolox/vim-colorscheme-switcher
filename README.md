@@ -60,7 +60,7 @@ Probably this solution is still not perfect, but it's a lot better than the beha
 
 ## Contact
 
-If you have questions, bug reports, suggestions, etc. the author can be contacted at <peter@peterodding.com>. The latest version is available at <http://peterodding.com/code/vim/colorscheme-switcher/> and <http://github.com/xolox/vim-colorscheme-switcher>.
+If you have questions, bug reports, suggestions, etc. the author can be contacted at <peter@peterodding.com>. The latest version is available at <http://peterodding.com/code/vim/colorscheme-switcher/> and <http://github.com/xolox/vim-colorscheme-switcher>. If you like this plug-in please vote for it on [Vim Online] [vim_online].
 
 ## License
 
@@ -71,7 +71,8 @@ This software is licensed under the [MIT license] [mit].
 [bg]: http://vimdoc.sourceforge.net/htmldoc/options.html#'background'
 [cs]: http://vimdoc.sourceforge.net/htmldoc/syntax.html#:colorscheme
 [dl]: http://peterodding.com/code/vim/downloads/colorscheme-switcher.zip
+[hi]: http://vimdoc.sourceforge.net/htmldoc/syntax.html#:highlight
 [mit]: http://en.wikipedia.org/wiki/MIT_License
 [vim]: http://www.vim.org/
+[vim_online]: http://www.vim.org/scripts/script.php?script_id=4586
 [vimrc]: http://vimdoc.sourceforge.net/htmldoc/starting.html#vimrc
-[hi]: http://vimdoc.sourceforge.net/htmldoc/syntax.html#:highlight

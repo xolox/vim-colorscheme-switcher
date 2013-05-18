@@ -138,13 +138,14 @@ Contact ~
 If you have questions, bug reports, suggestions, etc. the author can be
 contacted at peter@peterodding.com. The latest version is available at
 http://peterodding.com/code/vim/colorscheme-switcher/ and
-http://github.com/xolox/vim-colorscheme-switcher.
+http://github.com/xolox/vim-colorscheme-switcher. If you like this plug-in
+please vote for it on Vim Online [4].
 
 ===============================================================================
                                                   *colorscheme-switcher-license*
 License ~
 
-This software is licensed under the MIT license [4]. ÂŠ 2013 Peter Odding
+This software is licensed under the MIT license [5]. ÂŠ 2013 Peter Odding
 <peter@peterodding.com>.
 
 ===============================================================================
@@ -154,6 +155,7 @@ References ~
 [1] http://peterodding.com/code/vim/downloads/colorscheme-switcher.zip
 [2] https://github.com/altercation/solarized/issues/102
 [3] http://stackoverflow.com/questions/12915797/gvim-remove-syntax-highlighting-groups
-[4] http://en.wikipedia.org/wiki/MIT_License
+[4] http://www.vim.org/scripts/script.php?script_id=4586
+[5] http://en.wikipedia.org/wiki/MIT_License
 
 vim: ft=help
