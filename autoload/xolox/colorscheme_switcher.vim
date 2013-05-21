@@ -1,3 +1,9 @@
+" This Vim script was modified by a Python script that I use to manage the
+" inclusion of miscellaneous functions in the plug-ins that I publish to Vim
+" Online and GitHub. Please don't edit this file, instead make your changes on
+" the 'dev' branch of the git repository (thanks!). This file was generated on
+" May 21, 2013 at 02:33.
+
 " Vim plug-in
 " Maintainer: Peter Odding <peter@peterodding.com>
 " Last Change: May 21, 2013
@@ -69,7 +75,7 @@ function! xolox#colorscheme_switcher#cycle(forward) " {{{1
   silent execute 'doautocmd ColorScheme' fnameescape(list[index])
 
   " Print the name of the loaded color scheme?
-  call xolox#misc#msg#info('colorscheme-switcher.vim %s: Loaded color scheme %s (%i/%i)', g:xolox#colorscheme_switcher#version, list[index], index, len(list))
+  call xolox#colorscheme_switcher#misc#msg#info('colorscheme-switcher.vim %s: Loaded color scheme %s (%i/%i)', g:xolox#colorscheme_switcher#version, list[index], index, len(list))
 
 endfunction
 
@@ -87,7 +93,7 @@ endfunction
 
 function! xolox#colorscheme_switcher#find_links() " {{{1
   " Find and remember links between highlighting groups.
-  call xolox#misc#msg#info('colorscheme-switcher.vim %s: Using :highlight command to discover links between highlighting groups ..', g:xolox#colorscheme_switcher#version)
+  call xolox#colorscheme_switcher#misc#msg#info('colorscheme-switcher.vim %s: Using :highlight command to discover links between highlighting groups ..', g:xolox#colorscheme_switcher#version)
   redir => listing
   try
     silent highlight
@@ -104,7 +110,7 @@ function! xolox#colorscheme_switcher#find_links() " {{{1
       let s:known_links[fromgroup] = togroup
     endif
   endfor
-  call xolox#misc#msg#info('colorscheme-switcher.vim %s: Found %i links between highlighting groups in output of :highlight command.', g:xolox#colorscheme_switcher#version, len(s:known_links))
+  call xolox#colorscheme_switcher#misc#msg#info('colorscheme-switcher.vim %s: Found %i links between highlighting groups in output of :highlight command.', g:xolox#colorscheme_switcher#version, len(s:known_links))
 endfunction
 
 function! xolox#colorscheme_switcher#restore_links() " {{{1
@@ -130,7 +136,7 @@ function! xolox#colorscheme_switcher#restore_links() " {{{1
     endif
   endfor
   if num_restored > 0
-    call xolox#misc#msg#info('colorscheme-switcher.vim %s: Restored %i links between highlighting groups.', g:xolox#colorscheme_switcher#version, num_restored)
+    call xolox#colorscheme_switcher#misc#msg#info('colorscheme-switcher.vim %s: Restored %i links between highlighting groups.', g:xolox#colorscheme_switcher#version, num_restored)
   endif
 endfunction
 
