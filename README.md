@@ -4,9 +4,13 @@ The colorscheme switcher plug-in for the [Vim text editor] [vim] makes it easy t
 
 ## Installation
 
-Unzip the most recent [ZIP archive] [dl] file inside your Vim profile directory (usually this is `~/.vim` on UNIX and `%USERPROFILE%\vimfiles` on Windows), restart Vim and execute the command `:helptags ~/.vim/doc` (use `:helptags ~\vimfiles\doc` instead on Windows). Now try it out: Execute `:NextColorScheme` to switch to the next color scheme.
+*Please note that the vim-colorscheme-switcher plug-in requires my vim-misc plug-in which is separately distributed.*
+
+Unzip the most recent ZIP archives of the [vim-colorscheme-switcher] [dcs] and [vim-misc] [dms] plug-ins inside your Vim profile directory (usually this is `~/.vim` on UNIX and `%USERPROFILE%\vimfiles` on Windows), restart Vim and execute the command `:helptags ~/.vim/doc` (use `:helptags ~\vimfiles\doc` instead on Windows). Now try it out: Execute `:NextColorScheme` to switch to the next color scheme.
 
 If you didn't change the plug-in's configuration you can now use the `F8` and `Shift-F8` keys to switch to the next/previous color scheme.
+
+If you prefer you can also use [Pathogen] [pathogen], [Vundle] [vundle] or a similar tool to install & update the [vim-colorscheme-switcher] [github-colorscheme-switcher] and [vim-misc] [github-misc] plug-ins using a local clone of the git repository.
 
 ## Commands
 
@@ -70,9 +74,14 @@ This software is licensed under the [MIT license] [mit].
 
 [bg]: http://vimdoc.sourceforge.net/htmldoc/options.html#'background'
 [cs]: http://vimdoc.sourceforge.net/htmldoc/syntax.html#:colorscheme
-[dl]: http://peterodding.com/code/vim/downloads/colorscheme-switcher.zip
+[dcs]: http://peterodding.com/code/vim/downloads/colorscheme-switcher.zip
+[dms]: http://peterodding.com/code/vim/downloads/misc.zip
+[github-colorscheme-switcher]: http://github.com/xolox/vim-colorscheme-switcher
+[github-misc]: http://github.com/xolox/vim-misc
 [hi]: http://vimdoc.sourceforge.net/htmldoc/syntax.html#:highlight
 [mit]: http://en.wikipedia.org/wiki/MIT_License
+[pathogen]: http://www.vim.org/scripts/script.php?script_id=2332
 [vim]: http://www.vim.org/
 [vim_online]: http://www.vim.org/scripts/script.php?script_id=4586
 [vimrc]: http://vimdoc.sourceforge.net/htmldoc/starting.html#vimrc
+[vundle]: https://github.com/gmarik/vundle

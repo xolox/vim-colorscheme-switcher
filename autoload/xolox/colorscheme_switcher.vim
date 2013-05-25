@@ -1,9 +1,9 @@
 " Vim plug-in
 " Maintainer: Peter Odding <peter@peterodding.com>
-" Last Change: May 21, 2013
+" Last Change: May 25, 2013
 " URL: http://peterodding.com/code/vim/colorscheme-switcher
 
-let g:xolox#colorscheme_switcher#version = '0.2.3'
+let g:xolox#colorscheme_switcher#version = '0.2.4'
 
 " Dictionary with previously seen links between highlighting groups.
 if !exists('s:known_links')
