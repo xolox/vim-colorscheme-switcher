@@ -1,6 +1,6 @@
 " Vim plug-in
 " Maintainer: Peter Odding <peter@peterodding.com>
-" Last Change: May 18, 2013
+" Last Change: August 19, 2013
 " URL: http://peterodding.com/code/vim/colorscheme-switcher
 
 " This Vim plug-in defines two commands and four key mappings to quickly
@@ -8,9 +8,20 @@
 
 if &cp || exists('g:loaded_colorscheme_switcher')
   finish
-else
-  let g:loaded_colorscheme_switcher = 1
 endif
+
+" Make sure vim-misc is installed.
+try
+  " The point of this code is to do something completely innocent while making
+  " sure the vim-misc plug-in is installed. We specifically don't use Vim's
+  " exists() function because it doesn't load auto-load scripts that haven't
+  " already been loaded yet (last tested on Vim 7.3).
+  call type(g:xolox#misc#version)
+catch
+  echomsg "Warning: The vim-colorscheme-switcher plug-in requires the vim-misc plug-in which seems not to be installed! For more information please review the installation instructions in the readme (also available on the homepage and on GitHub). The vim-colorscheme-switcher plug-in will now be disabled."
+  let g:loaded_colorscheme_switcher = 1
+  finish
+endtry
 
 " You can set this variable to 0 (false) in your vimrc script to disable the
 " default mappings (F8 in insert and normal mode).
@@ -41,5 +52,8 @@ endif
 
 command! -bar -bang NextColorScheme call xolox#colorscheme_switcher#next()
 command! -bar -bang PrevColorScheme call xolox#colorscheme_switcher#previous()
+
+" Don't reload the plug-in once it has loaded successfully.
+let g:loaded_colorscheme_switcher = 1
 
 " vim: ts=2 sw=2 et
