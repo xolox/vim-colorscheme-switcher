@@ -1,9 +1,9 @@
 " Vim plug-in
 " Maintainer: Peter Odding <peter@peterodding.com>
-" Last Change: August 19, 2013
+" Last Change: June 19, 2014
 " URL: http://peterodding.com/code/vim/colorscheme-switcher
 
-let g:xolox#colorscheme_switcher#version = '0.2.5'
+let g:xolox#colorscheme_switcher#version = '0.3'
 
 " Dictionary with previously seen links between highlighting groups.
 if !exists('s:known_links')
@@ -20,57 +20,42 @@ function! xolox#colorscheme_switcher#previous() " {{{1
   return xolox#colorscheme_switcher#cycle(0)
 endfunction
 
+function! xolox#colorscheme_switcher#random() " {{{1
+  " Switch to a random color scheme.
+  let choices = xolox#colorscheme_switcher#find_names()
+  if exists('g:colors_name')
+    call filter(choices, 'v:val != g:colors_name')
+  endif
+  let original_background = &background
+  for i in range(len(choices))
+    let index = xolox#colorscheme_switcher#random_number(len(choices))
+    call xolox#colorscheme_switcher#switch_to(choices[index])
+    if !g:colorscheme_switcher_keep_background || &background == original_background
+      call xolox#misc#msg#info('colorscheme-switcher.vim %s: Loaded random color scheme (%s)', g:xolox#colorscheme_switcher#version, choices[index])
+      return
+    endif
+  endfor
+  call xolox#misc#msg#debug('colorscheme-switcher.vim %s: Ran out of color schemes!', g:xolox#colorscheme_switcher#version)
+endfunction
+
 function! xolox#colorscheme_switcher#cycle(forward) " {{{1
   " Switch to the next or previous color scheme.
-
-  " Get a sorted list with the available color schemes.
-  let list = xolox#colorscheme_switcher#find_names()
-
-  " Find the index of the currently loaded color scheme.
-  let index = exists('g:colors_name') ? index(list, g:colors_name) : 0
-
-  " Find the color scheme that should be loaded next.
-  let old_bg = &background
-  let prev_name = exists('g:colors_name') ? g:colors_name : ''
-  while 1
-
-    " Get the index of the next/previous color scheme.
+  let choices = xolox#colorscheme_switcher#find_names()
+  let index = exists('g:colors_name') ? index(choices, g:colors_name) : 0
+  let original_background = &background
+  for i in range(len(choices))
     if a:forward
-      let index = (index + 1) % len(list)
+      let index = (index + 1) % len(choices)
     else
-      let index = (index ? index : len(list)) - 1
+      let index = (index ? index : len(choices)) - 1
     endif
-
-    " Find and remember links between highlighting groups before switching to
-    " the next or previous color scheme.
-    call xolox#colorscheme_switcher#find_links()
-
-    " Load the selected color scheme.
-    execute 'colorscheme' fnameescape(list[index])
-
-    " For highlighting groups that used to be linked and are now "cleared",
-    " we'll restore the link to the last known target group.
-    call xolox#colorscheme_switcher#restore_links()
-
-    " Stop searching when we've found the right color scheme.
-    if !g:colorscheme_switcher_keep_background || &background == old_bg
-      break
+    call xolox#colorscheme_switcher#switch_to(choices[index])
+    if !g:colorscheme_switcher_keep_background || &background == original_background
+      call xolox#misc#msg#info('colorscheme-switcher.vim %s: Loaded color scheme %s (%i/%i)', g:xolox#colorscheme_switcher#version, choices[index], index, len(choices))
+      return
     endif
-
-    let prev_name = list[index]
-
-  endwhile
-
-  " Set the global colors_name variable because some color scheme scripts fail
-  " to do so or use the wrong name (for example rainbow_autumn uses autumn).
-  let g:colors_name = list[index]
-
-  " Enable the user to customize the loaded color scheme.
-  silent execute 'doautocmd ColorScheme' fnameescape(list[index])
-
-  " Print the name of the loaded color scheme?
-  call xolox#misc#msg#info('colorscheme-switcher.vim %s: Loaded color scheme %s (%i/%i)', g:xolox#colorscheme_switcher#version, list[index], index, len(list))
-
+  endfor
+  call xolox#misc#msg#debug('colorscheme-switcher.vim %s: Ran out of color schemes!', g:xolox#colorscheme_switcher#version)
 endfunction
 
 function! xolox#colorscheme_switcher#find_names() " {{{1
@@ -87,7 +72,7 @@ endfunction
 
 function! xolox#colorscheme_switcher#find_links() " {{{1
   " Find and remember links between highlighting groups.
-  call xolox#misc#msg#info('colorscheme-switcher.vim %s: Using :highlight command to discover links between highlighting groups ..', g:xolox#colorscheme_switcher#version)
+  call xolox#misc#msg#debug('colorscheme-switcher.vim %s: Using :highlight command to discover links between highlighting groups ..', g:xolox#colorscheme_switcher#version)
   redir => listing
   try
     silent highlight
@@ -104,7 +89,7 @@ function! xolox#colorscheme_switcher#find_links() " {{{1
       let s:known_links[fromgroup] = togroup
     endif
   endfor
-  call xolox#misc#msg#info('colorscheme-switcher.vim %s: Found %i links between highlighting groups in output of :highlight command.', g:xolox#colorscheme_switcher#version, len(s:known_links))
+  call xolox#misc#msg#debug('colorscheme-switcher.vim %s: Found %i links between highlighting groups in output of :highlight command.', g:xolox#colorscheme_switcher#version, len(s:known_links))
 endfunction
 
 function! xolox#colorscheme_switcher#restore_links() " {{{1
@@ -129,9 +114,26 @@ function! xolox#colorscheme_switcher#restore_links() " {{{1
       endif
     endif
   endfor
-  if num_restored > 0
-    call xolox#misc#msg#info('colorscheme-switcher.vim %s: Restored %i links between highlighting groups.', g:xolox#colorscheme_switcher#version, num_restored)
-  endif
+  call xolox#misc#msg#debug('colorscheme-switcher.vim %s: Restored %i links between highlighting groups.', g:xolox#colorscheme_switcher#version, num_restored)
+endfunction
+
+function! xolox#colorscheme_switcher#switch_to(name) " {{{1
+  " Switch to the given color scheme.
+  call xolox#colorscheme_switcher#find_links()
+  execute 'colorscheme' fnameescape(a:name)
+  call xolox#colorscheme_switcher#restore_links()
+  " Set the global colors_name variable because some color scheme scripts fail
+  " to do so or use the wrong name (for example rainbow_autumn uses autumn).
+  let g:colors_name = a:name
+  " Enable the user to customize the loaded color scheme.
+  silent execute 'doautocmd ColorScheme' fnameescape(a:name)
+endfunction
+
+function! xolox#colorscheme_switcher#random_number(limit) " {{{1
+  " Generate a `random' number (for some definition of the word).
+  let components = split(reltimestr(reltime()), '\.')
+  let microseconds = components[-1] + 0
+  return microseconds % a:limit
 endfunction
 
 " vim: ts=2 sw=2 et fdm=marker

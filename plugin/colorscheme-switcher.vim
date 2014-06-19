@@ -1,6 +1,6 @@
 " Vim plug-in
 " Maintainer: Peter Odding <peter@peterodding.com>
-" Last Change: August 19, 2013
+" Last Change: June 19, 2014
 " URL: http://peterodding.com/code/vim/colorscheme-switcher
 
 " This Vim plug-in defines two commands and four key mappings to quickly
@@ -48,10 +48,13 @@ if g:colorscheme_switcher_define_mappings
   nnoremap <silent> <F8> :NextColorScheme<CR>
   inoremap <silent> <S-F8> <C-O>:PrevColorScheme<CR>
   nnoremap <silent> <S-F8> :PrevColorScheme<CR>
+  inoremap <silent> <C-F8> <C-O>:RandomColorScheme<CR>
+  nnoremap <silent> <C-F8> :RandomColorScheme<CR>
 endif
 
-command! -bar -bang NextColorScheme call xolox#colorscheme_switcher#next()
-command! -bar -bang PrevColorScheme call xolox#colorscheme_switcher#previous()
+command! -bar NextColorScheme call xolox#colorscheme_switcher#next()
+command! -bar PrevColorScheme call xolox#colorscheme_switcher#previous()
+command! -bar RandomColorScheme call xolox#colorscheme_switcher#random()
 
 " Don't reload the plug-in once it has loaded successfully.
 let g:loaded_colorscheme_switcher = 1

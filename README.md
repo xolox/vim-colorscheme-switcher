@@ -8,7 +8,7 @@ The colorscheme switcher plug-in for the [Vim text editor] [vim] makes it easy t
 
 Unzip the most recent ZIP archives of the [vim-colorscheme-switcher] [dcs] and [vim-misc] [dms] plug-ins inside your Vim profile directory (usually this is `~/.vim` on UNIX and `%USERPROFILE%\vimfiles` on Windows), restart Vim and execute the command `:helptags ~/.vim/doc` (use `:helptags ~\vimfiles\doc` instead on Windows). Now try it out: Execute `:NextColorScheme` to switch to the next color scheme.
 
-If you didn't change the plug-in's configuration you can now use the `F8` and `Shift-F8` keys to switch to the next/previous color scheme.
+If you didn't change the plug-in's configuration you can now use the `F8` and `Shift-F8` keys to switch to the next/previous color scheme and `Control-F8` to switch to a random color scheme.
 
 If you prefer you can also use [Pathogen] [pathogen], [Vundle] [vundle] or a similar tool to install & update the [vim-colorscheme-switcher] [github-colorscheme-switcher] and [vim-misc] [github-misc] plug-ins using a local clone of the git repository.
 
@@ -21,6 +21,10 @@ Switch to the next color scheme. After the last color scheme the cycle repeats f
 ### The `:PrevColorScheme` command
 
 Switch to the previous color scheme. After the first color scheme the cycle repeats from the last color scheme.
+
+### The `:RandomColorScheme` command
+
+Switch to a random color scheme. Because Vim doesn't actually expose random numbers the microseconds of the current time are used to improvise a source of randomness. It's nothing like real randomness but convincing enough for this plug-in :-).
 
 ## Options
 
@@ -68,8 +72,8 @@ If you have questions, bug reports, suggestions, etc. the author can be contacte
 
 ## License
 
-This software is licensed under the [MIT license] [mit].  
-© 2013 Peter Odding &lt;<peter@peterodding.com>&gt;.
+This software is licensed under the [MIT license] [mit].
+© 2014 Peter Odding &lt;<peter@peterodding.com>&gt;.
 
 
 [bg]: http://vimdoc.sourceforge.net/htmldoc/options.html#'background'
