@@ -55,6 +55,10 @@ A list with names of color schemes to be ignored by the plug-in. By default the 
 
 This option is a string specifying the Vim command used to switch between color schemes. It defaults to the [:colorscheme] [cs] command. You can set this option to integrate the vim-colorscheme-switcher plug-in with other plug-ins like [colorsupport.vim](https://github.com/vim-scripts/colorsupport.vim) and [guicolorscheme.vim](https://github.com/vim-scripts/guicolorscheme.vim).
 
+## See also
+
+The [vim-colorscheme-manager](https://github.com/Taverius/vim-colorscheme-manager) plug-in is an add-on for vim-colorscheme-switcher that adds features like more convenient blacklist management and automatic loading of the last used color scheme when Vim starts up or a session is loaded.
+
 ## Known problems
 
 The way Vim color schemes are written isn't really compatible with the idea of quickly switching between lots of color schemes. In my opinion this is an ugly implementation detail of how Vim works internally, in other words I think it's a bug that should be fixed... Here are some references that explain the problem in some detail:
