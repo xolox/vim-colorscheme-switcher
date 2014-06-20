@@ -1,6 +1,6 @@
 " Vim plug-in
 " Maintainer: Peter Odding <peter@peterodding.com>
-" Last Change: June 19, 2014
+" Last Change: June 20, 2014
 " URL: http://peterodding.com/code/vim/colorscheme-switcher
 
 " This Vim plug-in defines two commands and four key mappings to quickly
@@ -41,6 +41,11 @@ if !exists('g:colorscheme_switcher_exclude')
   " Note: The following color scheme scripts breaks cycling through the
   " color schemes because of their use of linked highlight groups!
   let g:colorscheme_switcher_exclude = []
+endif
+
+" Change this variable to set the Vim command used to activate color schemes.
+if !exists('g:colorscheme_switcher_command')
+  let g:colorscheme_switcher_command = 'colorscheme'
 endif
 
 if g:colorscheme_switcher_define_mappings

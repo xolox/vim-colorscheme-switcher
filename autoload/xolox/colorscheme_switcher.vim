@@ -1,9 +1,9 @@
 " Vim plug-in
 " Maintainer: Peter Odding <peter@peterodding.com>
-" Last Change: June 19, 2014
+" Last Change: June 20, 2014
 " URL: http://peterodding.com/code/vim/colorscheme-switcher
 
-let g:xolox#colorscheme_switcher#version = '0.3'
+let g:xolox#colorscheme_switcher#version = '0.4'
 
 " Dictionary with previously seen links between highlighting groups.
 if !exists('s:known_links')
@@ -120,13 +120,15 @@ endfunction
 function! xolox#colorscheme_switcher#switch_to(name) " {{{1
   " Switch to the given color scheme.
   call xolox#colorscheme_switcher#find_links()
-  execute 'colorscheme' fnameescape(a:name)
-  call xolox#colorscheme_switcher#restore_links()
+  execute g:colorscheme_switcher_command fnameescape(a:name)
   " Set the global colors_name variable because some color scheme scripts fail
   " to do so or use the wrong name (for example rainbow_autumn uses autumn).
   let g:colors_name = a:name
   " Enable the user to customize the loaded color scheme.
   silent execute 'doautocmd ColorScheme' fnameescape(a:name)
+  " Restore syntax group links as the last step to make sure the syntax group
+  " links are not clobbered by user defined automatic commands.
+  call xolox#colorscheme_switcher#restore_links()
 endfunction
 
 function! xolox#colorscheme_switcher#random_number(limit) " {{{1

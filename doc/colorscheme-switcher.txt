@@ -13,6 +13,7 @@ Contents ~
   1. The |g:colorscheme_switcher_define_mappings| option
   2. The |g:colorscheme_switcher_keep_background| option
   3. The |g:colorscheme_switcher_exclude| option
+  4. The |g:colorscheme_switcher_command| option
  5. Known problems                        |colorscheme-switcher-known-problems|
  6. Contact                                      |colorscheme-switcher-contact|
  7. License                                      |colorscheme-switcher-license|
@@ -110,6 +111,14 @@ list is empty. Here's an example of how you can set this:
 >
   :let g:colorscheme_switcher_exclude = ['default', 'test']
 <
+-------------------------------------------------------------------------------
+The *g:colorscheme_switcher_command* option
+
+This option is a string specifying the Vim command used to switch between color
+schemes. It defaults to the |:colorscheme| command. You can set this option to
+integrate the vim-colorscheme-switcher plug-in with other plug-ins like
+colorsupport.vim [7] and guicolorscheme.vim [8].
+
 ===============================================================================
                                           *colorscheme-switcher-known-problems*
 Known problems ~
@@ -120,8 +129,8 @@ implementation detail of how Vim works internally, in other words I think it's
 a bug that should be fixed... Here are some references that explain the problem
 in some detail:
 
-- Vim colorscheme leaves a wake of destruction when switching away [7]
-- gVim: remove syntax highlighting groups [8]
+- Vim colorscheme leaves a wake of destruction when switching away [9]
+- gVim: remove syntax highlighting groups [10]
 
 Since this behavior hinders cycling through color schemes, the colorscheme
 switcher plug-in includes a workaround that should hide the problem:
@@ -155,13 +164,13 @@ If you have questions, bug reports, suggestions, etc. the author can be
 contacted at peter@peterodding.com. The latest version is available at
 http://peterodding.com/code/vim/colorscheme-switcher/ and
 http://github.com/xolox/vim-colorscheme-switcher. If you like this plug-in
-please vote for it on Vim Online [9].
+please vote for it on Vim Online [11].
 
 ===============================================================================
                                                  *colorscheme-switcher-license*
 License ~
 
-This software is licensed under the MIT license [10]. ÂŠ 2014 Peter Odding
+This software is licensed under the MIT license [12]. ÂŠ 2014 Peter Odding
 <peter@peterodding.com>.
 
 ===============================================================================
@@ -174,9 +183,11 @@ References ~
 [4] https://github.com/gmarik/vundle
 [5] http://github.com/xolox/vim-colorscheme-switcher
 [6] http://github.com/xolox/vim-misc
-[7] https://github.com/altercation/solarized/issues/102
-[8] http://stackoverflow.com/questions/12915797/gvim-remove-syntax-highlighting-groups
-[9] http://www.vim.org/scripts/script.php?script_id=4586
-[10] http://en.wikipedia.org/wiki/MIT_License
+[7] https://github.com/vim-scripts/colorsupport.vim
+[8] https://github.com/vim-scripts/guicolorscheme.vim
+[9] https://github.com/altercation/solarized/issues/102
+[10] http://stackoverflow.com/questions/12915797/gvim-remove-syntax-highlighting-groups
+[11] http://www.vim.org/scripts/script.php?script_id=4586
+[12] http://en.wikipedia.org/wiki/MIT_License
 
 vim: ft=help
