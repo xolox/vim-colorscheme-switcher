@@ -1,9 +1,9 @@
 " Vim plug-in
 " Maintainer: Peter Odding <peter@peterodding.com>
-" Last Change: June 20, 2014
+" Last Change: June 25, 2014
 " URL: http://peterodding.com/code/vim/colorscheme-switcher
 
-let g:xolox#colorscheme_switcher#version = '0.4'
+let g:xolox#colorscheme_switcher#version = '0.4.1'
 
 " Dictionary with previously seen links between highlighting groups.
 if !exists('s:known_links')
@@ -30,7 +30,7 @@ function! xolox#colorscheme_switcher#random() " {{{1
   for i in range(len(choices))
     let index = xolox#colorscheme_switcher#random_number(len(choices))
     call xolox#colorscheme_switcher#switch_to(choices[index])
-    if !g:colorscheme_switcher_keep_background || &background == original_background
+    if !xolox#misc#option#get('colorscheme_switcher_keep_background', 0) || &background == original_background
       call xolox#misc#msg#info('colorscheme-switcher.vim %s: Loaded random color scheme (%s)', g:xolox#colorscheme_switcher#version, choices[index])
       return
     endif
@@ -50,7 +50,7 @@ function! xolox#colorscheme_switcher#cycle(forward) " {{{1
       let index = (index ? index : len(choices)) - 1
     endif
     call xolox#colorscheme_switcher#switch_to(choices[index])
-    if !g:colorscheme_switcher_keep_background || &background == original_background
+    if !xolox#misc#option#get('colorscheme_switcher_keep_background', 0) || &background == original_background
       call xolox#misc#msg#info('colorscheme-switcher.vim %s: Loaded color scheme %s (%i/%i)', g:xolox#colorscheme_switcher#version, choices[index], index, len(choices))
       return
     endif
@@ -63,7 +63,8 @@ function! xolox#colorscheme_switcher#find_names() " {{{1
   let list = []
   for fname in split(globpath(&runtimepath, 'colors/*.vim'), '\n')
     let name = fnamemodify(fname, ':t:r')
-    if index(list, name) == -1 && index(g:colorscheme_switcher_exclude, name) == -1
+    let exclude = xolox#misc#option#get('colorscheme_switcher_exclude', [])
+    if index(list, name) == -1 && index(exclude, name) == -1
       call add(list, name)
     endif
   endfor
@@ -120,7 +121,8 @@ endfunction
 function! xolox#colorscheme_switcher#switch_to(name) " {{{1
   " Switch to the given color scheme.
   call xolox#colorscheme_switcher#find_links()
-  execute g:colorscheme_switcher_command fnameescape(a:name)
+  let command = xolox#misc#option#get('colorscheme_switcher_command', 'colorscheme')
+  execute command fnameescape(a:name)
   " Set the global colors_name variable because some color scheme scripts fail
   " to do so or use the wrong name (for example rainbow_autumn uses autumn).
   let g:colors_name = a:name
