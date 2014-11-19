@@ -1,9 +1,9 @@
 " Vim plug-in
 " Maintainer: Peter Odding <peter@peterodding.com>
-" Last Change: June 25, 2014
+" Last Change: November 19, 2014
 " URL: http://peterodding.com/code/vim/colorscheme-switcher
 
-let g:xolox#colorscheme_switcher#version = '0.4.1'
+let g:xolox#colorscheme_switcher#version = '0.5'
 
 " Dictionary with previously seen links between highlighting groups.
 if !exists('s:known_links')
@@ -60,15 +60,20 @@ endfunction
 
 function! xolox#colorscheme_switcher#find_names() " {{{1
   " Get a sorted list with the available color schemes.
-  let list = []
+  let matches = {}
+  let exclude_list = xolox#misc#option#get('colorscheme_switcher_exclude', [])
+  let exclude_builtins = xolox#misc#option#get('colorscheme_switcher_exclude_builtins', 0)
   for fname in split(globpath(&runtimepath, 'colors/*.vim'), '\n')
     let name = fnamemodify(fname, ':t:r')
-    let exclude = xolox#misc#option#get('colorscheme_switcher_exclude', [])
-    if index(list, name) == -1 && index(exclude, name) == -1
-      call add(list, name)
+    " Ignore names in the exclude list.
+    if index(exclude_list, name) == -1
+      " Ignore color schemes bundled with Vim?
+      if !(exclude_builtins && xolox#misc#path#starts_with(fname, $VIMRUNTIME))
+        let matches[name] = 1
+      endif
     endif
   endfor
-  return sort(list, 1)
+  return sort(keys(matches), 1)
 endfunction
 
 function! xolox#colorscheme_switcher#find_links() " {{{1

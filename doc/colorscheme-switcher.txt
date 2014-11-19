@@ -13,7 +13,8 @@ Contents ~
   1. The |g:colorscheme_switcher_define_mappings| option
   2. The |g:colorscheme_switcher_keep_background| option
   3. The |g:colorscheme_switcher_exclude| option
-  4. The |g:colorscheme_switcher_command| option
+  4. The |g:colorscheme_switcher_exclude_builtins| option
+  5. The |g:colorscheme_switcher_command| option
  5. See also                                    |colorscheme-switcher-see-also|
  6. Known problems                        |colorscheme-switcher-known-problems|
  7. Contact                                      |colorscheme-switcher-contact|
@@ -112,6 +113,13 @@ list is empty. Here's an example of how you can set this:
 >
   :let g:colorscheme_switcher_exclude = ['default', 'test']
 <
+-------------------------------------------------------------------------------
+The *g:colorscheme_switcher_exclude_builtins* option
+
+If you set this variable to 1 (true) the color schemes bundled with Vim
+(installed in '$VIMRUNTIME') are ignored and instead only the color schemes
+that you specifically installed in your Vim profile are used.
+
 -------------------------------------------------------------------------------
 The *g:colorscheme_switcher_command* option
 
