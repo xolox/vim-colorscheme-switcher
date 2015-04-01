@@ -33,23 +33,13 @@ and mappings to switch to the next and previous color schemes.
                                             *colorscheme-switcher-installation*
 Installation ~
 
-_Please note that the vim-colorscheme-switcher plug-in requires my vim-misc
-plug-in which is separately distributed._
+Please refer to the installation instructions [1] available on GitHub. Once
+you've installed the plug-in you can try it out by executing |:NextColorScheme|
+to switch to the next color scheme.
 
-Unzip the most recent ZIP archives of the vim-colorscheme-switcher [1] and vim-
-misc [2] plug-ins inside your Vim profile directory (usually this is '~/.vim'
-on UNIX and '%USERPROFILE%\vimfiles' on Windows), restart Vim and execute the
-command ':helptags ~/.vim/doc' (use ':helptags ~\vimfiles\doc' instead on
-Windows). Now try it out: Execute |:NextColorScheme| to switch to the next
-color scheme.
-
-If you didn't change the plug-in's configuration you can now use the 'F8' and
+If you didn't change the plug-in's configuration you can use the 'F8' and
 'Shift-F8' keys to switch to the next/previous color scheme and 'Control-F8' to
 switch to a random color scheme.
-
-If you prefer you can also use Pathogen [3], Vundle [4] or a similar tool to
-install & update the vim-colorscheme-switcher [5] and vim-misc [6] plug-ins
-using a local clone of the git repository.
 
 ===============================================================================
                                                 *colorscheme-switcher-commands*
@@ -126,13 +116,13 @@ The *g:colorscheme_switcher_command* option
 This option is a string specifying the Vim command used to switch between color
 schemes. It defaults to the |:colorscheme| command. You can set this option to
 integrate the vim-colorscheme-switcher plug-in with other plug-ins like
-colorsupport.vim [7] and guicolorscheme.vim [8].
+colorsupport.vim [2] and guicolorscheme.vim [3].
 
 ===============================================================================
                                                 *colorscheme-switcher-see-also*
 See also ~
 
-The vim-colorscheme-manager [9] plug-in is an add-on for vim-colorscheme-
+The vim-colorscheme-manager [4] plug-in is an add-on for vim-colorscheme-
 switcher that adds features like more convenient blacklist management and
 automatic loading of the last used color scheme when Vim starts up or a session
 is loaded.
@@ -147,8 +137,8 @@ implementation detail of how Vim works internally, in other words I think it's
 a bug that should be fixed... Here are some references that explain the problem
 in some detail:
 
-- Vim colorscheme leaves a wake of destruction when switching away [10]
-- gVim: remove syntax highlighting groups [11]
+- Vim colorscheme leaves a wake of destruction when switching away [5]
+- gVim: remove syntax highlighting groups [6]
 
 Since this behavior hinders cycling through color schemes, the colorscheme
 switcher plug-in includes a workaround that should hide the problem:
@@ -182,31 +172,26 @@ If you have questions, bug reports, suggestions, etc. the author can be
 contacted at peter@peterodding.com. The latest version is available at
 http://peterodding.com/code/vim/colorscheme-switcher/ and
 http://github.com/xolox/vim-colorscheme-switcher. If you like this plug-in
-please vote for it on Vim Online [12].
+please vote for it on Vim Online [7].
 
 ===============================================================================
                                                  *colorscheme-switcher-license*
 License ~
 
-This software is licensed under the MIT license [13]. ÂŠ 2014 Peter Odding
+This software is licensed under the MIT license [8]. © 2015 Peter Odding
 <peter@peterodding.com>.
 
 ===============================================================================
                                               *colorscheme-switcher-references*
 References ~
 
-[1] http://peterodding.com/code/vim/downloads/colorscheme-switcher.zip
-[2] http://peterodding.com/code/vim/downloads/misc.zip
-[3] http://www.vim.org/scripts/script.php?script_id=2332
-[4] https://github.com/gmarik/vundle
-[5] http://github.com/xolox/vim-colorscheme-switcher
-[6] http://github.com/xolox/vim-misc
-[7] https://github.com/vim-scripts/colorsupport.vim
-[8] https://github.com/vim-scripts/guicolorscheme.vim
-[9] https://github.com/Taverius/vim-colorscheme-manager
-[10] https://github.com/altercation/solarized/issues/102
-[11] http://stackoverflow.com/questions/12915797/gvim-remove-syntax-highlighting-groups
-[12] http://www.vim.org/scripts/script.php?script_id=4586
-[13] http://en.wikipedia.org/wiki/MIT_License
+[1] https://github.com/xolox/vim-colorscheme-switcher/blob/master/INSTALL.md
+[2] https://github.com/vim-scripts/colorsupport.vim
+[3] https://github.com/vim-scripts/guicolorscheme.vim
+[4] https://github.com/Taverius/vim-colorscheme-manager
+[5] https://github.com/altercation/solarized/issues/102
+[6] http://stackoverflow.com/questions/12915797/gvim-remove-syntax-highlighting-groups
+[7] http://www.vim.org/scripts/script.php?script_id=4586
+[8] http://en.wikipedia.org/wiki/MIT_License
 
 vim: ft=help
