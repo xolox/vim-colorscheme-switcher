@@ -1,9 +1,9 @@
 " Vim plug-in
 " Maintainer: Peter Odding <peter@peterodding.com>
-" Last Change: November 19, 2014
+" Last Change: April 1, 2015
 " URL: http://peterodding.com/code/vim/colorscheme-switcher
 
-let g:xolox#colorscheme_switcher#version = '0.5'
+let g:xolox#colorscheme_switcher#version = '0.5.1'
 
 " Dictionary with previously seen links between highlighting groups.
 if !exists('s:known_links')
@@ -136,6 +136,15 @@ function! xolox#colorscheme_switcher#switch_to(name) " {{{1
   " Restore syntax group links as the last step to make sure the syntax group
   " links are not clobbered by user defined automatic commands.
   call xolox#colorscheme_switcher#restore_links()
+  " It looks like terminal Vim has some peculiarities of its own and the
+  " following workaround may improve its behavior. Because I don't yet
+  " understand exactly how or why this works, I've decided to add the
+  " workaround but only apply it when it seems to be relevant (in
+  " terminal Vim). For details refer to issue #6 on GitHub:
+  " https://github.com/xolox/vim-colorscheme-switcher/issues/6
+  if !has('gui_running')
+    let &syntax = &syntax
+  endif
 endfunction
 
 function! xolox#colorscheme_switcher#random_number(limit) " {{{1
