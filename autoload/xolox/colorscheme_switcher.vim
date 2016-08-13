@@ -131,6 +131,9 @@ function! xolox#colorscheme_switcher#switch_to(name) " {{{1
   " Set the global colors_name variable because some color scheme scripts fail
   " to do so or use the wrong name (for example rainbow_autumn uses autumn).
   let g:colors_name = a:name
+  " Have vim figure out the background, for color scheme scripts that don't
+  " set it
+  set background&
   " Enable the user to customize the loaded color scheme.
   silent execute 'doautocmd ColorScheme' fnameescape(a:name)
   " Restore syntax group links as the last step to make sure the syntax group
