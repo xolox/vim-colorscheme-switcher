@@ -41,6 +41,14 @@ If you set this variable to 1 (true) and cycle to the next/previous color scheme
 
 This is useful when you want to see only light or dark color schemes, for example because the sun is shining (you'll want a light background) or because it's late at night (then you'll likely prefer a dark background).
 
+### The `g:colorscheme_switcher_include` option
+
+Some plug-ins like [vim-colorschemes][vcs] and [base16-vim][b16] provide huge suites of colorschemes, which are time-consuming to cycle through.  To limit switching to just your favorites, you can set a list like this:
+
+    :let g:colorscheme_switcher_include = ['jellybeans', 'ir_black', 'default']
+
+The schemes in this option are subject to further filtering by the other options.
+
 ### The `g:colorscheme_switcher_exclude` option
 
 A list with names of color schemes to be ignored by the plug-in. By default the list is empty. Here's an example of how you can set this:
@@ -94,3 +102,5 @@ This software is licensed under the [MIT license] [mit].
 [vim]: http://www.vim.org/
 [vim_online]: http://www.vim.org/scripts/script.php?script_id=4586
 [vimrc]: http://vimdoc.sourceforge.net/htmldoc/starting.html#vimrc
+[vcs]: https://github.com/flazz/vim-colorschemes
+[b16]: https://github.com/chriskempson/base16-vim

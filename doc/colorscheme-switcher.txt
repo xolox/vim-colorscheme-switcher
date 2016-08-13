@@ -12,9 +12,10 @@ Contents ~
  4. Options                                      |colorscheme-switcher-options|
   1. The |g:colorscheme_switcher_define_mappings| option
   2. The |g:colorscheme_switcher_keep_background| option
-  3. The |g:colorscheme_switcher_exclude| option
-  4. The |g:colorscheme_switcher_exclude_builtins| option
-  5. The |g:colorscheme_switcher_command| option
+  3. The |g:colorscheme_switcher_include| option
+  4. The |g:colorscheme_switcher_exclude| option
+  5. The |g:colorscheme_switcher_exclude_builtins| option
+  6. The |g:colorscheme_switcher_command| option
  5. See also                                    |colorscheme-switcher-see-also|
  6. Known problems                        |colorscheme-switcher-known-problems|
  7. Contact                                      |colorscheme-switcher-contact|
@@ -94,6 +95,18 @@ default this is set to 0 (false).
 This is useful when you want to see only light or dark color schemes, for
 example because the sun is shining (you'll want a light background) or because
 it's late at night (then you'll likely prefer a dark background).
+
+-------------------------------------------------------------------------------
+The *g:colorscheme_switcher_include* option
+
+Some plug-ins like vim-colorschemes [9] and base16-vim [10] provide huge
+suites of colorschemes, which are time-consuming to cycle through.  To limit
+switching to just your favorites, you can set a list like this:
+>
+  :let g:colorscheme_switcher_include = ['jellybeans', 'ir_black', 'default']
+<
+The schemes in this option are subject to further filtering by the other
+options.
 
 -------------------------------------------------------------------------------
 The *g:colorscheme_switcher_exclude* option
@@ -193,5 +206,7 @@ References ~
 [6] http://stackoverflow.com/questions/12915797/gvim-remove-syntax-highlighting-groups
 [7] http://www.vim.org/scripts/script.php?script_id=4586
 [8] http://en.wikipedia.org/wiki/MIT_License
+[9] https://github.com/flazz/vim-colorschemes
+[10] https://github.com/chriskempson/base16-vim
 
 vim: ft=help

@@ -61,6 +61,7 @@ endfunction
 function! xolox#colorscheme_switcher#find_names() " {{{1
   " Get a sorted list with the available color schemes.
   let matches = {}
+  let include_list = xolox#misc#option#get('colorscheme_switcher_include', [])
   let exclude_list = xolox#misc#option#get('colorscheme_switcher_exclude', [])
   let exclude_builtins = xolox#misc#option#get('colorscheme_switcher_exclude_builtins', 0)
   for fname in split(globpath(&runtimepath, 'colors/*.vim'), '\n')
@@ -73,6 +74,11 @@ function! xolox#colorscheme_switcher#find_names() " {{{1
       endif
     endif
   endfor
+  if len(include_list) > 0
+    " An include_list was configured. Return it in user-defined order,
+    " filtering out any colorschemes not found or allowed by above rules
+    return filter(copy(include_list), 'has_key(matches, v:val)')
+  endif
   return sort(keys(matches), 1)
 endfunction
 
