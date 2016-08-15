@@ -6,7 +6,7 @@ The colorscheme switcher plug-in for the [Vim text editor] [vim] makes it easy t
 
 Please refer to the [installation instructions] [howto-install] available on GitHub. Once you've installed the plug-in you can try it out by executing `:NextColorScheme` to switch to the next color scheme.
 
-If you didn't change the plug-in's configuration you can use the `F8` and `Shift-F8` keys to switch to the next/previous color scheme and `Control-F8` to switch to a random color scheme.
+If you didn't change the plug-in's configuration you can use the `F8` and `Shift-F8` keys to switch to the next/previous color scheme, `Control-F8` to switch to a random color scheme and `Shift-Control-F8` to switch between light and dark color schemes.
 
 ## Commands
 
@@ -21,6 +21,10 @@ Switch to the previous color scheme. After the first color scheme the cycle repe
 ### The `:RandomColorScheme` command
 
 Switch to a random color scheme. Because Vim doesn't actually expose random numbers the microseconds of the current time are used to improvise a source of randomness. It's nothing like real randomness but convincing enough for this plug-in :-).
+
+### The `:ColorSchemeToggleBG` command
+
+Switch to the next color scheme with a different background (light/dark). This really only makes sense in combination with the `g:colorscheme_switcher_keep_background` option (see below).  For when you are cycling though dark backgrounds and decide you want a light one instead.
 
 ## Options
 
