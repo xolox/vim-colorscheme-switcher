@@ -6,9 +6,9 @@ Contents ~
  1. Introduction                            |colorscheme-switcher-introduction|
  2. Installation                            |colorscheme-switcher-installation|
  3. Commands                                    |colorscheme-switcher-commands|
-  1. The |:NextColorScheme| command
-  2. The |:PrevColorScheme| command
-  3. The |:RandomColorScheme| command
+  1. The |:ColorSchemeNext| command
+  2. The |:ColorSchemePrev| command
+  3. The |:ColorSchemeRandom| command
   4. The |:ColorSchemeToggleBG| command
  4. Options                                      |colorscheme-switcher-options|
   1. The |g:colorscheme_switcher_define_mappings| option
@@ -36,7 +36,7 @@ and mappings to switch to the next and previous color schemes.
 Installation ~
 
 Please refer to the installation instructions [1] available on GitHub. Once
-you've installed the plug-in you can try it out by executing |:NextColorScheme|
+you've installed the plug-in you can try it out by executing |:ColorSchemeNext|
 to switch to the next color scheme.
 
 If you didn't change the plug-in's configuration you can use the 'F8' and
@@ -49,19 +49,19 @@ light and dark color schemes.
 Commands ~
 
 -------------------------------------------------------------------------------
-The *:NextColorScheme* command
+The *:ColorSchemeNext* command
 
 Switch to the next color scheme. After the last color scheme the cycle repeats
 from the first color scheme.
 
 -------------------------------------------------------------------------------
-The *:PrevColorScheme* command
+The *:ColorSchemePrev* command
 
 Switch to the previous color scheme. After the first color scheme the cycle
 repeats from the last color scheme.
 
 -------------------------------------------------------------------------------
-The *:RandomColorScheme* command
+The *:ColorSchemeRandom* command
 
 Switch to a random color scheme. Because Vim doesn't actually expose random
 numbers the microseconds of the current time are used to improvise a source of
