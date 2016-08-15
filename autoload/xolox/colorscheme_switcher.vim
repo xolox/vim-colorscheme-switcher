@@ -51,7 +51,7 @@ function! xolox#colorscheme_switcher#cycle(forward) " {{{1
     endif
     call xolox#colorscheme_switcher#switch_to(choices[index])
     if !xolox#misc#option#get('colorscheme_switcher_keep_background', 0) || &background == original_background
-      call xolox#misc#msg#info('colorscheme-switcher.vim %s: Loaded color scheme %s (%i/%i)', g:xolox#colorscheme_switcher#version, choices[index], index, len(choices))
+      call xolox#misc#msg#info('colorscheme-switcher.vim %s: Loaded color scheme %s (%i/%i)', g:xolox#colorscheme_switcher#version, choices[index], index+1, len(choices))
       return
     endif
   endfor
