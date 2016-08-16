@@ -6,15 +6,17 @@ Contents ~
  1. Introduction                            |colorscheme-switcher-introduction|
  2. Installation                            |colorscheme-switcher-installation|
  3. Commands                                    |colorscheme-switcher-commands|
-  1. The |:NextColorScheme| command
-  2. The |:PrevColorScheme| command
-  3. The |:RandomColorScheme| command
+  1. The |:ColorSchemeNext| command
+  2. The |:ColorSchemePrev| command
+  3. The |:ColorSchemeRandom| command
+  4. The |:ColorSchemeToggleBG| command
  4. Options                                      |colorscheme-switcher-options|
   1. The |g:colorscheme_switcher_define_mappings| option
   2. The |g:colorscheme_switcher_keep_background| option
-  3. The |g:colorscheme_switcher_exclude| option
-  4. The |g:colorscheme_switcher_exclude_builtins| option
-  5. The |g:colorscheme_switcher_command| option
+  3. The |g:colorscheme_switcher_include| option
+  4. The |g:colorscheme_switcher_exclude| option
+  5. The |g:colorscheme_switcher_exclude_builtins| option
+  6. The |g:colorscheme_switcher_command| option
  5. See also                                    |colorscheme-switcher-see-also|
  6. Known problems                        |colorscheme-switcher-known-problems|
  7. Contact                                      |colorscheme-switcher-contact|
@@ -34,36 +36,45 @@ and mappings to switch to the next and previous color schemes.
 Installation ~
 
 Please refer to the installation instructions [1] available on GitHub. Once
-you've installed the plug-in you can try it out by executing |:NextColorScheme|
+you've installed the plug-in you can try it out by executing |:ColorSchemeNext|
 to switch to the next color scheme.
 
 If you didn't change the plug-in's configuration you can use the 'F8' and
-'Shift-F8' keys to switch to the next/previous color scheme and 'Control-F8' to
-switch to a random color scheme.
+'Shift-F8' keys to switch to the next/previous color scheme, 'Control-F8' to
+switch to a random color scheme and 'Shift-Control-F8' to switch between
+light and dark color schemes.
 
 ===============================================================================
                                                 *colorscheme-switcher-commands*
 Commands ~
 
 -------------------------------------------------------------------------------
-The *:NextColorScheme* command
+The *:ColorSchemeNext* command
 
 Switch to the next color scheme. After the last color scheme the cycle repeats
 from the first color scheme.
 
 -------------------------------------------------------------------------------
-The *:PrevColorScheme* command
+The *:ColorSchemePrev* command
 
 Switch to the previous color scheme. After the first color scheme the cycle
 repeats from the last color scheme.
 
 -------------------------------------------------------------------------------
-The *:RandomColorScheme* command
+The *:ColorSchemeRandom* command
 
 Switch to a random color scheme. Because Vim doesn't actually expose random
 numbers the microseconds of the current time are used to improvise a source of
 randomness. It's nothing like real randomness but convincing enough for this
 plug-in :-).
+
+-------------------------------------------------------------------------------
+The *:ColorSchemeToggleBG* command
+
+Switch to the next color scheme with a different background (light/dark). This
+really only makes sense in combination with the
+|g:colorscheme_switcher_keep_background| option (see below).  For when you are
+cycling though dark backgrounds and decide you want a light one instead.
 
 ===============================================================================
                                                  *colorscheme-switcher-options*
@@ -94,6 +105,18 @@ default this is set to 0 (false).
 This is useful when you want to see only light or dark color schemes, for
 example because the sun is shining (you'll want a light background) or because
 it's late at night (then you'll likely prefer a dark background).
+
+-------------------------------------------------------------------------------
+The *g:colorscheme_switcher_include* option
+
+Some plug-ins like vim-colorschemes [9] and base16-vim [10] provide huge
+suites of colorschemes, which are time-consuming to cycle through.  To limit
+switching to just your favorites, you can set a list like this:
+>
+  :let g:colorscheme_switcher_include = ['jellybeans', 'ir_black', 'default']
+<
+The schemes in this option are subject to further filtering by the other
+options.
 
 -------------------------------------------------------------------------------
 The *g:colorscheme_switcher_exclude* option
@@ -193,5 +216,7 @@ References ~
 [6] http://stackoverflow.com/questions/12915797/gvim-remove-syntax-highlighting-groups
 [7] http://www.vim.org/scripts/script.php?script_id=4586
 [8] http://en.wikipedia.org/wiki/MIT_License
+[9] https://github.com/flazz/vim-colorschemes
+[10] https://github.com/chriskempson/base16-vim
 
 vim: ft=help

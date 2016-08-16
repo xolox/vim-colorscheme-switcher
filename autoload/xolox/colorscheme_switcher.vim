@@ -41,17 +41,20 @@ endfunction
 function! xolox#colorscheme_switcher#cycle(forward) " {{{1
   " Switch to the next or previous color scheme.
   let choices = xolox#colorscheme_switcher#find_names()
-  let index = exists('g:colors_name') ? index(choices, g:colors_name) : 0
+  let index = exists('g:colors_name') ? index(choices, g:colors_name) : -1
+  if index == -1 && exists('s:last_switched_to')
+    let index = index(choices, s:last_switched_to)
+  endif
   let original_background = &background
   for i in range(len(choices))
     if a:forward
       let index = (index + 1) % len(choices)
     else
-      let index = (index ? index : len(choices)) - 1
+      let index = (index > 0 ? index : len(choices)) - 1
     endif
     call xolox#colorscheme_switcher#switch_to(choices[index])
     if !xolox#misc#option#get('colorscheme_switcher_keep_background', 0) || &background == original_background
-      call xolox#misc#msg#info('colorscheme-switcher.vim %s: Loaded color scheme %s (%i/%i)', g:xolox#colorscheme_switcher#version, choices[index], index, len(choices))
+      call xolox#misc#msg#info('colorscheme-switcher.vim %s: Loaded color scheme %s (%i/%i)', g:xolox#colorscheme_switcher#version, choices[index], index+1, len(choices))
       return
     endif
   endfor
@@ -61,6 +64,7 @@ endfunction
 function! xolox#colorscheme_switcher#find_names() " {{{1
   " Get a sorted list with the available color schemes.
   let matches = {}
+  let include_list = xolox#misc#option#get('colorscheme_switcher_include', [])
   let exclude_list = xolox#misc#option#get('colorscheme_switcher_exclude', [])
   let exclude_builtins = xolox#misc#option#get('colorscheme_switcher_exclude_builtins', 0)
   for fname in split(globpath(&runtimepath, 'colors/*.vim'), '\n')
@@ -73,6 +77,11 @@ function! xolox#colorscheme_switcher#find_names() " {{{1
       endif
     endif
   endfor
+  if len(include_list) > 0
+    " An include_list was configured. Return it in user-defined order,
+    " filtering out any colorschemes not found or allowed by above rules
+    return filter(copy(include_list), 'has_key(matches, v:val)')
+  endif
   return sort(keys(matches), 1)
 endfunction
 
@@ -128,9 +137,13 @@ function! xolox#colorscheme_switcher#switch_to(name) " {{{1
   call xolox#colorscheme_switcher#find_links()
   let command = xolox#misc#option#get('colorscheme_switcher_command', 'colorscheme')
   execute command fnameescape(a:name)
+  let s:last_switched_to = a:name
   " Set the global colors_name variable because some color scheme scripts fail
   " to do so or use the wrong name (for example rainbow_autumn uses autumn).
   let g:colors_name = a:name
+  " Have vim figure out the background, for color scheme scripts that don't
+  " set it
+  set background&
   " Enable the user to customize the loaded color scheme.
   silent execute 'doautocmd ColorScheme' fnameescape(a:name)
   " Restore syntax group links as the last step to make sure the syntax group
@@ -145,6 +158,12 @@ function! xolox#colorscheme_switcher#switch_to(name) " {{{1
   if !has('gui_running')
     let &syntax = &syntax
   endif
+endfunction
+
+function! xolox#colorscheme_switcher#bgtoggle() " {{{1
+  " Toggle background between light/dark
+  let &background = (&background == 'dark' ? 'light' : 'dark')
+  call xolox#colorscheme_switcher#next()
 endfunction
 
 function! xolox#colorscheme_switcher#random_number(limit) " {{{1

@@ -4,23 +4,27 @@ The colorscheme switcher plug-in for the [Vim text editor] [vim] makes it easy t
 
 ## Installation
 
-Please refer to the [installation instructions] [howto-install] available on GitHub. Once you've installed the plug-in you can try it out by executing `:NextColorScheme` to switch to the next color scheme.
+Please refer to the [installation instructions] [howto-install] available on GitHub. Once you've installed the plug-in you can try it out by executing `:ColorSchemeNext` to switch to the next color scheme.
 
-If you didn't change the plug-in's configuration you can use the `F8` and `Shift-F8` keys to switch to the next/previous color scheme and `Control-F8` to switch to a random color scheme.
+If you didn't change the plug-in's configuration you can use the `F8` and `Shift-F8` keys to switch to the next/previous color scheme, `Control-F8` to switch to a random color scheme and `Shift-Control-F8` to switch between light and dark color schemes.
 
 ## Commands
 
-### The `:NextColorScheme` command
+### The `:ColorSchemeNext` command
 
 Switch to the next color scheme. After the last color scheme the cycle repeats from the first color scheme.
 
-### The `:PrevColorScheme` command
+### The `:ColorSchemePrev` command
 
 Switch to the previous color scheme. After the first color scheme the cycle repeats from the last color scheme.
 
-### The `:RandomColorScheme` command
+### The `:ColorSchemeRandom` command
 
 Switch to a random color scheme. Because Vim doesn't actually expose random numbers the microseconds of the current time are used to improvise a source of randomness. It's nothing like real randomness but convincing enough for this plug-in :-).
+
+### The `:ColorSchemeToggleBG` command
+
+Switch to the next color scheme with a different background (light/dark). This really only makes sense in combination with the `g:colorscheme_switcher_keep_background` option (see below).  For when you are cycling though dark backgrounds and decide you want a light one instead.
 
 ## Options
 
@@ -40,6 +44,14 @@ To disable these mappings (e.g. because you're already using them for a differen
 If you set this variable to 1 (true) and cycle to the next/previous color scheme, the plug-in will skip color schemes with a different ['background'] [bg]. By default this is set to 0 (false).
 
 This is useful when you want to see only light or dark color schemes, for example because the sun is shining (you'll want a light background) or because it's late at night (then you'll likely prefer a dark background).
+
+### The `g:colorscheme_switcher_include` option
+
+Some plug-ins like [vim-colorschemes][vcs] and [base16-vim][b16] provide huge suites of colorschemes, which are time-consuming to cycle through.  To limit switching to just your favorites, you can set a list like this:
+
+    :let g:colorscheme_switcher_include = ['jellybeans', 'ir_black', 'default']
+
+The schemes in this option are subject to further filtering by the other options.
 
 ### The `g:colorscheme_switcher_exclude` option
 
@@ -94,3 +106,5 @@ This software is licensed under the [MIT license] [mit].
 [vim]: http://www.vim.org/
 [vim_online]: http://www.vim.org/scripts/script.php?script_id=4586
 [vimrc]: http://vimdoc.sourceforge.net/htmldoc/starting.html#vimrc
+[vcs]: https://github.com/flazz/vim-colorschemes
+[b16]: https://github.com/chriskempson/base16-vim
