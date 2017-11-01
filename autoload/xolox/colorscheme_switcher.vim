@@ -20,22 +20,26 @@ function! xolox#colorscheme_switcher#previous() " {{{1
   return xolox#colorscheme_switcher#cycle(0)
 endfunction
 
+function! xolox#colorscheme_switcher#random_among(choices) " {{{1
+  let original_background = &background
+  for i in range(len(a:choices))
+    let index = xolox#colorscheme_switcher#random_number(len(a:choices))
+    call xolox#colorscheme_switcher#switch_to(a:choices[index])
+    if !xolox#misc#option#get('colorscheme_switcher_keep_background', 0) || &background == original_background
+      call xolox#misc#msg#info('colorscheme-switcher.vim %s: Loaded random color scheme (%s)', g:xolox#colorscheme_switcher#version, a:choices[index])
+      return
+    endif
+  endfor
+  call xolox#misc#msg#debug('colorscheme-switcher.vim %s: Ran out of color schemes!', g:xolox#colorscheme_switcher#version)
+endfunction
+
 function! xolox#colorscheme_switcher#random() " {{{1
   " Switch to a random color scheme.
   let choices = xolox#colorscheme_switcher#find_names()
   if exists('g:colors_name')
     call filter(choices, 'v:val != g:colors_name')
   endif
-  let original_background = &background
-  for i in range(len(choices))
-    let index = xolox#colorscheme_switcher#random_number(len(choices))
-    call xolox#colorscheme_switcher#switch_to(choices[index])
-    if !xolox#misc#option#get('colorscheme_switcher_keep_background', 0) || &background == original_background
-      call xolox#misc#msg#info('colorscheme-switcher.vim %s: Loaded random color scheme (%s)', g:xolox#colorscheme_switcher#version, choices[index])
-      return
-    endif
-  endfor
-  call xolox#misc#msg#debug('colorscheme-switcher.vim %s: Ran out of color schemes!', g:xolox#colorscheme_switcher#version)
+  call xolox#colorscheme_switcher#random_among(choices)
 endfunction
 
 function! xolox#colorscheme_switcher#cycle(forward) " {{{1
